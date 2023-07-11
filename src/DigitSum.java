@@ -1,7 +1,7 @@
 public class DigitSum {
     public static void main(String[] args) {
         int number = 19;
-        System.out.println("Sum of " + number + " = " +  extractNumber(number));
+        System.out.println("Sum of " + number + " = " +  sumOfTheDigit(number));
     }
 
     /**
@@ -11,7 +11,7 @@ public class DigitSum {
      * -1 if the number is negative
      * the number if it's single digit
      */
-    public static int extractNumber(int number){
+    public static int sumOfTheDigit(int number){
         if (number<0){
             return -1;
         }
