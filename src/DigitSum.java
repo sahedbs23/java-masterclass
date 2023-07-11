@@ -1,0 +1,25 @@
+public class DigitSum {
+    public static void main(String[] args) {
+        int number = 123;
+        System.out.println("Sum of " + number + " = " +  extractNumber(number));
+    }
+
+    /**
+     * find the sum of the integers
+     * @param number integer number
+     * @return sum of the integer
+     */
+    public static int extractNumber(int number){
+        int sum = 0;
+        while (number>0){
+            // find the right utmost digit
+            sum += number % 10;
+
+            // remove the last digit from number
+            number /= 10;
+        }
+        return sum;
+    }
+
+
+}
