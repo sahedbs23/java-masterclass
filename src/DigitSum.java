@@ -1,6 +1,6 @@
 public class DigitSum {
     public static void main(String[] args) {
-        int number = 123;
+        int number = 19;
         System.out.println("Sum of " + number + " = " +  extractNumber(number));
     }
 
@@ -14,13 +14,14 @@ public class DigitSum {
             return -1;
         }
         int sum = 0;
-        while (number>0){
+        while (number>9){
             // find the right utmost digit
             sum += number % 10;
 
             // remove the last digit from number
             number /= 10;
         }
+        sum += number;
         return sum;
     }
 
