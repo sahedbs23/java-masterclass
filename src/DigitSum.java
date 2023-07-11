@@ -8,6 +8,8 @@ public class DigitSum {
      * find the sum of the integers
      * @param number integer number
      * @return sum of the integer
+     * -1 if the number is negative
+     * the number if it's single digit
      */
     public static int extractNumber(int number){
         if (number<0){
