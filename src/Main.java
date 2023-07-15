@@ -1,22 +1,60 @@
+import java.util.Scanner;
+
 // Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
 // then press Enter. You can now see whitespace characters in your code.
 public class Main {
     public static void main(String[] args) {
-        int sum = 0;
-        byte count = 0;
-        byte min = 1;
-        short max = 1000;
-        for (int i = min; i < max && count<5; i++) {
-            if ( (i % 3 == 0) && (i % 5 == 0) ){
-                System.out.println(i);
-                sum += i;
-                count++;
-            }
+        int currentYear = 2023;
+        try {
+            int age = getUserInputByConsole(currentYear);
+            System.out.println("So you are " + age + " Years old");
+        }catch (NullPointerException e){
+            int age = getUserInputByScanner(currentYear);
+            System.out.println("So you are " + age + " Years old");
         }
-        System.out.println("Sum is =" + sum);
-        
-        
     }
+
+    public static int getUserInputByConsole(int currentYear){
+
+        String userNameInput = System.console().readLine("What's you name?");
+
+        System.out.println("Welcome "+ userNameInput);
+
+        String userInputDateOfBirth = System.console().readLine("What is the year you were born?");
+
+        return currentYear - Integer.parseInt(userInputDateOfBirth);
+    }
+
+    public static int getUserInputByScanner(int currentYear){
+
+        Scanner scanner = new Scanner(System.in);
+
+//        String userNameInput = System.console().readLine("What's you name?");
+        System.out.println("What's you name?");
+        String userNameInput = scanner.nextLine();
+        System.out.println("Welcome "+ userNameInput);
+
+//        String userInputDateOfBirth = System.console().readLine("What is the year you were born?");
+        System.out.println("What's year were you born?");
+        String userInputDateOfBirth = scanner.nextLine();
+        return currentYear - Integer.parseInt(userInputDateOfBirth);
+    }
+//    public static void main(String[] args) {
+//        int sum = 0;
+//        byte count = 0;
+//        byte min = 1;
+//        short max = 1000;
+//        for (int i = min; i < max && count<5; i++) {
+//            if ( (i % 3 == 0) && (i % 5 == 0) ){
+//                System.out.println(i);
+//                sum += i;
+//                count++;
+//            }
+//        }
+//        System.out.println("Sum is =" + sum);
+//
+//
+//    }
 
 //        byte myByteMinValue = Byte.MIN_VALUE;
 //        byte myByteMaxValue = Byte.MAX_VALUE;
