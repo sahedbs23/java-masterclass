@@ -4,40 +4,66 @@ import java.util.Scanner;
 // then press Enter. You can now see whitespace characters in your code.
 public class Main {
     public static void main(String[] args) {
-        int currentYear = 2023;
-        try {
-            int age = getUserInputByConsole(currentYear);
-            System.out.println("So you are " + age + " Years old");
-        }catch (NullPointerException e){
-            int age = getUserInputByScanner(currentYear);
-            System.out.println("So you are " + age + " Years old");
-        }
+
+        Car car = new  Car();
+        System.out.println("Model = " + car.getModel());
+        System.out.println("Color = " + car.getColor());
+        car.describeCar();
+        //        int currentYear = 2023;
+//        try {
+//            int age = getUserInputByConsole(currentYear);
+//            System.out.println("So you are " + age + " Years old");
+//        } catch (NullPointerException e) {
+//            int age = getUserInputByScanner(currentYear);
+//            System.out.println("So you are " + age + " Years old");
+//        }
     }
 
-    public static int getUserInputByConsole(int currentYear){
+    public static int getUserInputByConsole(int currentYear) {
 
         String userNameInput = System.console().readLine("What's you name?");
 
-        System.out.println("Welcome "+ userNameInput);
+        System.out.println("Welcome " + userNameInput);
 
         String userInputDateOfBirth = System.console().readLine("What is the year you were born?");
 
         return currentYear - Integer.parseInt(userInputDateOfBirth);
     }
 
-    public static int getUserInputByScanner(int currentYear){
+    public static int getUserInputByScanner(int currentYear) {
 
         Scanner scanner = new Scanner(System.in);
 
 //        String userNameInput = System.console().readLine("What's you name?");
         System.out.println("What's you name?");
         String userNameInput = scanner.nextLine();
-        System.out.println("Welcome "+ userNameInput);
+        System.out.println("Welcome " + userNameInput);
 
 //        String userInputDateOfBirth = System.console().readLine("What is the year you were born?");
+        int age = 0;
+        boolean isValidInput = false;
         System.out.println("What's year were you born?");
-        String userInputDateOfBirth = scanner.nextLine();
-        return currentYear - Integer.parseInt(userInputDateOfBirth);
+        do {
+            System.out.println("Enter a year between " + (currentYear - 125) + " and " + currentYear);
+            try {
+                age = checkUserInput(currentYear, scanner.nextLine());
+                isValidInput = age > 0;
+            } catch (NumberFormatException badUserInput) {
+                System.out.println("Only numeric data is acceptable");
+            }
+        } while (!isValidInput);
+
+        return age;
+
+    }
+
+    public static int checkUserInput(int currentYear, String userInputDateOfBirth) {
+        int dateOfYear = Integer.parseInt(userInputDateOfBirth);
+        int minimumAge = currentYear - 125;
+        if (dateOfYear < minimumAge || dateOfYear > currentYear) {
+            return -1;
+        }
+        return currentYear - dateOfYear;
     }
 //    public static void main(String[] args) {
 //        int sum = 0;
