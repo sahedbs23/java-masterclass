@@ -4,19 +4,46 @@ import java.util.Scanner;
 // then press Enter. You can now see whitespace characters in your code.
 public class Main {
     public static void main(String[] args) {
+//        StringFormatter.runMethods();
+        StringFormatter.stringPropertyMethods("Hello world");
+        StringFormatter.emptyAndBlank("");
+        StringFormatter.emptyAndBlank("     \n");
+        System.out.println("Hello world".indexOf("H"));
+        System.out.println("Hello world".indexOf("H"));
 
-        Point first = new Point(6, 5);
-        Point second = new Point(3, 1);
+        //    HiredEmployee hiredEmployee = new HiredEmployee(
+//            "Sahed Moral",
+//            "15-12-1990",
+//            123,
+//            "01-01-2021",
+//            24000,
+//            false
+//
+//    );
+//
+//    hiredEmployee.retire();
 
-        System.out.println("distance(0,0)= " + first.distance());
+        //        Animal animal = new Animal("Generic Animal", "Big size", 5.0);
+//        animalDoStuff(animal, "slow");
+//
+//        Animal dog = new Dog("Kedi kutta", "small", "not specified", "not mentioned");
+//        animalDoStuff(dog, "fast");
+//
+//        Animal cat = new Dog("","medium","","");
+//        animalDoStuff(cat, "fast");
 
-        System.out.println("distance(second)= " + first.distance(second));
-
-        System.out.println("distance(2,2)= " + first.distance(2, 2));
-
-        Point point = new Point();
-
-        System.out.println("distance()= " + point.distance());
+//        Point first = new Point(6, 5);
+//        Point second = new Point(3, 1);
+//
+//        System.out.println("distance(0,0)= " + first.distance());
+//
+//        System.out.println("distance(second)= " + first.distance(second));
+//
+//        System.out.println("distance(2,2)= " + first.distance(2, 2));
+//
+//        Point point = new Point();
+//
+//        System.out.println("distance()= " + point.distance());
 
 //        Customer defaultCustomer = new Customer();
 //
@@ -79,6 +106,15 @@ public class Main {
 //            int age = getUserInputByScanner(currentYear);
 //            System.out.println("So you are " + age + " Years old");
 //        }
+    }
+
+    public static void animalDoStuff(Animal animal, String speed){
+
+        System.out.println(animal);
+        animal.move(speed);
+        animal.makeNoise();
+
+        System.out.println("----");
     }
 
     public static int getUserInputByConsole(int currentYear) {
