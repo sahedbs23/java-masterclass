@@ -5,10 +5,72 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
 
-        Car car = new  Car();
-        System.out.println("Model = " + car.getModel());
-        System.out.println("Color = " + car.getColor());
-        car.describeCar();
+        Point first = new Point(6, 5);
+        Point second = new Point(3, 1);
+
+        System.out.println("distance(0,0)= " + first.distance());
+
+        System.out.println("distance(second)= " + first.distance(second));
+
+        System.out.println("distance(2,2)= " + first.distance(2, 2));
+
+        Point point = new Point();
+
+        System.out.println("distance()= " + point.distance());
+
+//        Customer defaultCustomer = new Customer();
+//
+//        System.out.println(defaultCustomer.getName());
+//        System.out.println(defaultCustomer.getCreditLimit());
+//        System.out.println(defaultCustomer.getEmail());
+//
+//        Customer sahedCustomer = new Customer("sahed","sahed.moral@123rf.com", 45);
+//
+//        System.out.println(sahedCustomer.getName());
+//        System.out.println(sahedCustomer.getCreditLimit());
+//        System.out.println(sahedCustomer.getEmail());
+//
+//
+//        Customer zeroCreditCustomer = new Customer("rejuana","prova@123rf.com");
+//
+//        System.out.println(zeroCreditCustomer.getName());
+//        System.out.println(zeroCreditCustomer.getCreditLimit());
+//        System.out.println(zeroCreditCustomer.getEmail());
+
+//        Account sahedAccount = new Account(
+//                "572",
+//                500.20,
+//                "Sahed",
+//                "sahed.moral@outlook.com",
+//                "(880) 1714 999720"
+//        );
+//
+//        if (sahedAccount.deposit(50)){
+//            System.out.println("Balance after deposit : "+sahedAccount.getBalance());
+//        }
+//
+//        if (sahedAccount.withdraw(600)){
+//            System.out.println("Balance after withdraw : " + sahedAccount.getBalance());
+//        }else {
+//            System.out.println("you do noy have sufficient balance");
+//        }
+//
+//        if (sahedAccount.withdraw(200)){
+//            System.out.println("Balance after withdraw : " + sahedAccount.getBalance());
+//        }else {
+//            System.out.println("you do noy have sufficient balance");
+//        }
+//
+//        Account account = new Account();
+//        System.out.println(account.getCustomerName());
+//
+//        Account EblAccount = new Account("sahed","sahed@ebl.com.bd","8801714999720");
+
+
+//        Car car = new  Car();
+//        System.out.println("Model = " + car.getModel());
+//        System.out.println("Color = " + car.getColor());
+//        car.describeCar();
         //        int currentYear = 2023;
 //        try {
 //            int age = getUserInputByConsole(currentYear);
