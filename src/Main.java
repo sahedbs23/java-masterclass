@@ -4,13 +4,38 @@ import java.util.Scanner;
 // then press Enter. You can now see whitespace characters in your code.
 public class Main {
     public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        while (true){
+            System.out.println("Type s for science fiction movie, Type C for comedy movie, Type A for adventure move, Type q to quit!");
+            String type = scanner.nextLine();
+            if ("Qq".contains(type)){
+                break;
+            }
+            System.out.println("Type movie title");
+            String title = scanner.nextLine();
+            Movie movie = Movie.getMovie(title, type);
+            movie.watchMovie();
+        }
 
-        Refrigerator iceBox = new Refrigerator(false);
-        CoffeeMaker brewMaster = new CoffeeMaker(false);
-        DishWasher dishWasher = new DishWasher(false);
+//        Movie movie = Movie.getMovie("Start wards", "sci");
+//        movie.watchMovie();
 
-        SmartKitchen smartKitchen = new SmartKitchen(brewMaster,dishWasher, iceBox);
-        smartKitchen.doKitchenWork();
+//        Printer printer = new Printer(100, true);
+//        System.out.printf("Page printed %d%n", printer.getPagesPrinted());
+//
+//        int printedPage = printer.printPages(5);
+//        System.out.printf("Page provided %d Page printed %d%n",printedPage,printer.getPagesPrinted());
+//
+//
+//        printedPage = printer.printPages(9);
+//        System.out.printf("Page provided 8 Page printed %d and total page printed : %d %n",printedPage, printer.getPagesPrinted());
+
+//        Refrigerator iceBox = new Refrigerator(false);
+//        CoffeeMaker brewMaster = new CoffeeMaker(false);
+//        DishWasher dishWasher = new DishWasher(false);
+//
+//        SmartKitchen smartKitchen = new SmartKitchen(brewMaster,dishWasher, iceBox);
+//        smartKitchen.doKitchenWork();
 
 
 //        ComputerCase computerCase = new ComputerCase("2208", "Dell","300");
