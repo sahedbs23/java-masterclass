@@ -4,12 +4,33 @@ import java.util.Scanner;
 // then press Enter. You can now see whitespace characters in your code.
 public class Main {
     public static void main(String[] args) {
+
+        Refrigerator iceBox = new Refrigerator(false);
+        CoffeeMaker brewMaster = new CoffeeMaker(false);
+        DishWasher dishWasher = new DishWasher(false);
+
+        SmartKitchen smartKitchen = new SmartKitchen(brewMaster,dishWasher, iceBox);
+        smartKitchen.doKitchenWork();
+
+
+//        ComputerCase computerCase = new ComputerCase("2208", "Dell","300");
+//        Monitor monitor = new Monitor("27Inche Beast", "Acer", 27,"2700 X 1400");
+//        Motherboard motherboard = new Motherboard("BJ-200", "Asus", 6, 4, "v2.44");
+//
+//        PersonalComputer pc = new PersonalComputer("2208", "Dell", monitor,computerCase,motherboard);
+////        pc.getComputerCase().pressPowerButton();
+////        pc.getMonitor().drawPixel(27,24,"Red");
+////        pc.getMotherboard().loadProgram("Linux");
+//        pc.powerUp();
+        //
+//
+//
 //        StringFormatter.runMethods();
-        StringFormatter.stringPropertyMethods("Hello world");
-        StringFormatter.emptyAndBlank("");
-        StringFormatter.emptyAndBlank("     \n");
-        System.out.println("Hello world".indexOf("H"));
-        System.out.println("Hello world".indexOf("H"));
+//        StringFormatter.stringPropertyMethods("Hello world");
+//        StringFormatter.emptyAndBlank("");
+//        StringFormatter.emptyAndBlank("     \n");
+//        System.out.println("Hello world".indexOf("H"));
+//        System.out.println("Hello world".indexOf("H"));
 
         //    HiredEmployee hiredEmployee = new HiredEmployee(
 //            "Sahed Moral",
