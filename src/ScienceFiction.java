@@ -8,4 +8,9 @@ public class ScienceFiction extends Movie{
         super.watchMovie();
         System.out.printf("...%s%n".repeat(3),"Inception", "Interception", "Jurassic Part");
     }
+
+    public void watchScienceFictionMovie(){
+        watchMovie();
+        System.out.println("Watching Science fiction movie...");
+    }
 }

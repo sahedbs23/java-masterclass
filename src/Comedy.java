@@ -8,4 +8,8 @@ public class Comedy extends Movie{
         super.watchMovie();
         System.out.printf("...%s%n".repeat(3),"Johny English", "3 Idiots", "Once upon a time in the west");
     }
+    public void watchComedyMovie(){
+        watchMovie();
+        System.out.println("Watching comedy movie");
+    }
 }

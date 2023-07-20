@@ -8,4 +8,9 @@ public class Adventure extends Movie{
         super.watchMovie();
         System.out.printf("...%s%n".repeat(3),"Nothing Special", "Kink Kong", "Something bad happend");
     }
+
+    public void watchComedyMovie(){
+        watchMovie();
+        System.out.println("Watching Adventure movie...");
+    }
 }

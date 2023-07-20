@@ -1,65 +1,19 @@
 public class Car {
+    private String description;
 
-    private String make = "Tesla";
-    private String model ="2023";
-    private String color = "Red";
-    private int doors=4;
-    private boolean convertible=true;
-
-    public String getMake() {
-        return make;
+    public Car(String description) {
+        this.description = description;
     }
 
-    public String getModel() {
-        return model;
+    public void startEngine(){
+        System.out.printf("Start the %s engine%n", this.getClass().getSimpleName());
     }
 
-    public String getColor() {
-        return color;
+    public void drive(){
+        System.out.printf("Driving the %s%n", this.getClass().getSimpleName());
     }
 
-    public int getDoors() {
-        return doors;
-    }
-
-    public boolean isConvertible() {
-        return convertible;
-    }
-
-    public void setMake(String make) {
-        if (make == null) make = "Unknown";
-        String lowercaseMake = make.toLowerCase();
-        switch (lowercaseMake) {
-            case "tata", "tesla", "toyota" -> this.make = lowercaseMake;
-            default -> {
-                this.make = "Unsupported";
-            }
-        }
-    }
-
-    public void setModel(String model) {
-        this.model = model;
-    }
-
-    public void setColor(String color) {
-        this.color = color;
-    }
-
-    public void setDoors(int doors) {
-        this.doors = doors;
-    }
-
-    public void setConvertible(boolean convertible) {
-        this.convertible = convertible;
-    }
-
-    public void describeCar(){
-        System.out.println(
-            make + "- make-"
-            + model + "-model-"
-            +color+"-color"
-            +doors+"-doors-"
-            +convertible+"-convertible"
-        );
+    protected void  runEngine(){
+        System.out.printf("%s Engine running%n", this.getClass().getSimpleName());
     }
 }

@@ -5,17 +5,103 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        while (true){
-            System.out.println("Type s for science fiction movie, Type C for comedy movie, Type A for adventure move, Type q to quit!");
-            String type = scanner.nextLine();
-            if ("Qq".contains(type)){
+        Car myCar;
+        while (true) {
+            System.out.println("What kind of car are you using? Type H for hybrid, G for gas powered car, E for Electric car, Q for quite!");
+            String carType = scanner.nextLine();
+
+            if ("Qq".contains(carType)) {
                 break;
             }
-            System.out.println("Type movie title");
-            String title = scanner.nextLine();
-            Movie movie = Movie.getMovie(title, type);
-            movie.watchMovie();
+            System.out.println("Write a nice description for your car...");
+            String carDescription = scanner.nextLine();
+
+            switch (carType.toLowerCase().charAt(0)) {
+                case 'g' -> {
+                    System.out.println("What is the average speed of you gas powered car?");
+                    String gasCarSpeed = scanner.nextLine();
+
+                    System.out.println("How many cylinder do you car have?");
+                    String cylinderCount = scanner.nextLine();
+                    myCar = new GaspoweredCar(carDescription, Double.parseDouble(gasCarSpeed), Integer.parseInt(cylinderCount));
+                }
+                case 'h' -> {
+                    System.out.println("What is the average speed of you hybrid powered car?");
+                    String gasCarSpeed = scanner.nextLine();
+
+                    System.out.println("How many cylinder do you car have?");
+                    String cylinderCount = scanner.nextLine();
+
+                    System.out.println("How many battery do you car have?");
+                    String batteryCount = scanner.nextLine();
+                    myCar = new HybridCar(carDescription, Double.parseDouble(gasCarSpeed), Integer.parseInt(cylinderCount), Integer.parseInt(batteryCount));
+                }
+                case 'e' -> {
+                    System.out.println("What is the average speed of you Electric car?");
+                    String electricCarSpeed = scanner.nextLine();
+
+                    System.out.println("How many battery do you car have?");
+                    String batteryCount = scanner.nextLine();
+                    myCar = new ElectricCar(carDescription, Double.parseDouble(electricCarSpeed), Integer.parseInt(batteryCount));
+                }
+                default -> {
+                    myCar = new Car(carDescription);
+                }
+            }
+            myCar.startEngine();
+            myCar.runEngine();
+            myCar.drive();
+
         }
+
+//        Car car = new Car("My Red color Hondai car");
+//        car.startEngine();
+//        car.drive();
+//        car.runEngine();
+//
+//        Car gaspowredCar = new GaspoweredCar("My White toyota colora",70.5,2);
+//        gaspowredCar.startEngine();
+//        gaspowredCar.drive();
+//        gaspowredCar.runEngine();
+//
+//
+//        Car electricCar = new ElectricCar("Tesla",60,6);
+//        electricCar.startEngine();
+//        electricCar.drive();
+//        electricCar.runEngine();
+//
+//
+//        Car hybridCar = new HybridCar("Toyota Tesla",60,2, 4);
+//        hybridCar.startEngine();
+//        hybridCar.drive();
+//        hybridCar.runEngine();
+
+
+//        Movie movie = Movie.getMovie("Adventure", "Himalaya");
+//        movie.watchMovie();
+//
+//        Object unknownMovie = Movie.getMovie("Once upon a time in the west", "ScienceFiction");
+//        if (unknownMovie.getClass().getSimpleName().equals("Adventure")){
+//            ((Adventure) unknownMovie).watchComedyMovie();
+//        }else if (unknownMovie instanceof Comedy){
+//            ((Comedy) unknownMovie).watchComedyMovie();
+//        }else if (unknownMovie instanceof ScienceFiction syfy){
+//            syfy.watchScienceFictionMovie();
+//        }
+
+
+        //        Scanner scanner = new Scanner(System.in);
+//        while (true){
+//            System.out.println("Type s for science fiction movie, Type C for comedy movie, Type A for adventure move, Type q to quit!");
+//            String type = scanner.nextLine();
+//            if ("Qq".contains(type)){
+//                break;
+//            }
+//            System.out.println("Type movie title");
+//            String title = scanner.nextLine();
+//            Movie movie = Movie.getMovie(title, type);
+//            movie.watchMovie();
+//        }
 
 //        Movie movie = Movie.getMovie("Start wards", "sci");
 //        movie.watchMovie();
@@ -154,7 +240,7 @@ public class Main {
 //        }
     }
 
-    public static void animalDoStuff(Animal animal, String speed){
+    public static void animalDoStuff(Animal animal, String speed) {
 
         System.out.println(animal);
         animal.move(speed);
