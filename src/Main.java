@@ -4,55 +4,98 @@ import java.util.Scanner;
 // then press Enter. You can now see whitespace characters in your code.
 public class Main {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        Car myCar;
-        while (true) {
-            System.out.println("What kind of car are you using? Type H for hybrid, G for gas powered car, E for Electric car, Q for quite!");
-            String carType = scanner.nextLine();
+        Hamburger hamburger = new Hamburger("Basic", "Sausage", 3.56, "White");
+        hamburger.addHamburgerAddition1("Tomato", 0.27);
+        hamburger.addHamburgerAddition2("Lettuce", 0.75);
+        hamburger.addHamburgerAddition3("Cheese", 1.13);
+        System.out.println("Total Burger price is " + hamburger.itemizeHamburger());
 
-            if ("Qq".contains(carType)) {
-                break;
-            }
-            System.out.println("Write a nice description for your car...");
-            String carDescription = scanner.nextLine();
+        HealthyBurger healthyBurger = new HealthyBurger("Bacon", 5.67);
+        healthyBurger.addHamburgerAddition1("Egg", 5.43);
+        healthyBurger.addHealthyAddition1("Lentils", 3.41);
+        System.out.println("Total Healthy Burger price is  " + healthyBurger.itemizeHamburger());
 
-            switch (carType.toLowerCase().charAt(0)) {
-                case 'g' -> {
-                    System.out.println("What is the average speed of you gas powered car?");
-                    String gasCarSpeed = scanner.nextLine();
+        DeluxeBurger db = new DeluxeBurger();
+        db.addHamburgerAddition3("Should not do this", 50.53);
+        System.out.println("Total Deluxe Burger price is " + db.itemizeHamburger());
 
-                    System.out.println("How many cylinder do you car have?");
-                    String cylinderCount = scanner.nextLine();
-                    myCar = new GaspoweredCar(carDescription, Double.parseDouble(gasCarSpeed), Integer.parseInt(cylinderCount));
-                }
-                case 'h' -> {
-                    System.out.println("What is the average speed of you hybrid powered car?");
-                    String gasCarSpeed = scanner.nextLine();
 
-                    System.out.println("How many cylinder do you car have?");
-                    String cylinderCount = scanner.nextLine();
+        //        Meal meal = new Meal();
+//        meal.printMemo();
+//        System.out.println("...".repeat(10));
+//
+//        Burger deluxBurger = new DeluxeBurger(140);
+//        Drink water = new Drink("Water", 'm');
+//        ExtraFoodItem cashewNutSalad = new ExtraFoodItem("cashew nut salad", 70);
+//
+//        deluxBurger.addToppings(3);
+//
+//        Meal deluxBurgerMeal = new Meal(deluxBurger, water, cashewNutSalad);
+//        deluxBurgerMeal.printMemo();
+//        System.out.println("...".repeat(10));
+//
+//        Burger hemBurger = new HamBurger(110);
+//        Drink coke = new Drink("Coca cola kan", 's');
+//        ExtraFoodItem extraChess = new ExtraFoodItem("Extra Chess", 10);
+//        hemBurger.addToppings(2);
+//
+//        Meal hamburgerPackage = new Meal(hemBurger, coke, extraChess);
+//        coke.setSize('L');
+//
+//        hamburgerPackage.printMemo();
 
-                    System.out.println("How many battery do you car have?");
-                    String batteryCount = scanner.nextLine();
-                    myCar = new HybridCar(carDescription, Double.parseDouble(gasCarSpeed), Integer.parseInt(cylinderCount), Integer.parseInt(batteryCount));
-                }
-                case 'e' -> {
-                    System.out.println("What is the average speed of you Electric car?");
-                    String electricCarSpeed = scanner.nextLine();
 
-                    System.out.println("How many battery do you car have?");
-                    String batteryCount = scanner.nextLine();
-                    myCar = new ElectricCar(carDescription, Double.parseDouble(electricCarSpeed), Integer.parseInt(batteryCount));
-                }
-                default -> {
-                    myCar = new Car(carDescription);
-                }
-            }
-            myCar.startEngine();
-            myCar.runEngine();
-            myCar.drive();
 
-        }
+
+        //        Scanner scanner = new Scanner(System.in);
+//        Car myCar;
+//        while (true) {
+//            System.out.println("What kind of car are you using? Type H for hybrid, G for gas powered car, E for Electric car, Q for quite!");
+//            String carType = scanner.nextLine();
+//
+//            if ("Qq".contains(carType)) {
+//                break;
+//            }
+//            System.out.println("Write a nice description for your car...");
+//            String carDescription = scanner.nextLine();
+//
+//            switch (carType.toLowerCase().charAt(0)) {
+//                case 'g' -> {
+//                    System.out.println("What is the average speed of you gas powered car?");
+//                    String gasCarSpeed = scanner.nextLine();
+//
+//                    System.out.println("How many cylinder do you car have?");
+//                    String cylinderCount = scanner.nextLine();
+//                    myCar = new GaspoweredCar(carDescription, Double.parseDouble(gasCarSpeed), Integer.parseInt(cylinderCount));
+//                }
+//                case 'h' -> {
+//                    System.out.println("What is the average speed of you hybrid powered car?");
+//                    String gasCarSpeed = scanner.nextLine();
+//
+//                    System.out.println("How many cylinder do you car have?");
+//                    String cylinderCount = scanner.nextLine();
+//
+//                    System.out.println("How many battery do you car have?");
+//                    String batteryCount = scanner.nextLine();
+//                    myCar = new HybridCar(carDescription, Double.parseDouble(gasCarSpeed), Integer.parseInt(cylinderCount), Integer.parseInt(batteryCount));
+//                }
+//                case 'e' -> {
+//                    System.out.println("What is the average speed of you Electric car?");
+//                    String electricCarSpeed = scanner.nextLine();
+//
+//                    System.out.println("How many battery do you car have?");
+//                    String batteryCount = scanner.nextLine();
+//                    myCar = new ElectricCar(carDescription, Double.parseDouble(electricCarSpeed), Integer.parseInt(batteryCount));
+//                }
+//                default -> {
+//                    myCar = new Car(carDescription);
+//                }
+//            }
+//            myCar.startEngine();
+//            myCar.runEngine();
+//            myCar.drive();
+//
+//        }
 
 //        Car car = new Car("My Red color Hondai car");
 //        car.startEngine();
