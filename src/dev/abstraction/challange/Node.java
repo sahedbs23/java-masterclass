@@ -9,8 +9,7 @@ public class Node extends ListItem{
      * @param listItem {ListItem}
      * @return {int}
      */
-    @Override
-    public int compareTo(ListItem listItem) {
+    int compareTo(ListItem listItem) {
         if (listItem != null){
             return ((String) listItem.value).compareTo((String) super.getValue());
         }else {
@@ -18,13 +17,11 @@ public class Node extends ListItem{
         }
     }
 
-    @Override
-    public ListItem next(){
+    ListItem next(){
         return this.rightLink;
     }
 
-    @Override
-    public ListItem setNext(ListItem next){
+    ListItem setNext(ListItem next){
         this.rightLink = next;
         return this.rightLink;
     }
@@ -32,16 +29,14 @@ public class Node extends ListItem{
     /**
      * @return
      */
-    @Override
-    public ListItem previous() {
+    ListItem previous() {
         return this.leftLink;
     }
 
     /**
      * @param leftLink
      */
-    @Override
-    public ListItem setPrevious(ListItem leftLink) {
+    ListItem setPrevious(ListItem leftLink) {
         this.leftLink  = leftLink;
         return this.leftLink;
     }
