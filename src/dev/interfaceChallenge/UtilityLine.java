@@ -27,6 +27,12 @@ public class UtilityLine implements Mappable{
         return markerType;
     }
 
+    @Override
+    public String toJson() {
+        return """
+                "type": "%s", "label": "%s", "marker": "%s", "name": "%s", "utility": "%s" """.formatted( mapType,label, markerType, name,utility);
+    }
+
     public void setLabel(String label) {
         this.label = label;
     }

@@ -12,3 +12,4 @@ public enum GeometryType {
         return type;
     }
 }
+

@@ -5,8 +5,8 @@ public class Building implements Mappable{
     private String markerType;
     private GeometryType mapType;
 
-    public String name;
-    public String usage;
+    private String name;
+    private String usage;
 
     public Building(String name, String usage) {
         this.name=name;
@@ -28,6 +28,24 @@ public class Building implements Mappable{
         return markerType;
     }
 
+    public String getLabel() {
+        return label;
+    }
+
+    public String getMarkerType() {
+        return markerType;
+    }
+
+    public GeometryType getMapType() {
+        return mapType;
+    }
+
+    @Override
+    public String toJson() {
+        return """
+                "type": "%s", "label": "%s", "marker": "%s", "name": "%s", "usages": "%s" """.formatted( mapType,label, markerType, name,usage);
+    }
+
     public void setLabel(String label) {
         this.label = label;
     }
@@ -39,6 +57,5 @@ public class Building implements Mappable{
     public void setMapType(GeometryType mapType) {
         this.mapType = mapType;
     }
-
 
 }
