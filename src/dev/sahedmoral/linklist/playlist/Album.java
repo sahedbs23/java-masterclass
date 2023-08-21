@@ -2,58 +2,72 @@ package dev.sahedmoral.linklist.playlist;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.Objects;
 
 public class Album {
     private String name;
     private String artist;
-    private ArrayList<Song> songs;
+    private SongList songs;
 
-    public Album(String name, String artist){
+    public Album(String name, String artist) {
         this.name = name;
-        this.artist =artist;
-        this.songs = new ArrayList<>();
+        this.artist = artist;
+        this.songs = new SongList();
     }
 
-    public boolean addSong(String title, double duration){
-        Song song = findSong(title);
-        if (song != null){
-            return false;
+    public boolean addSong(String songTitle, double duration) {
+        return this.songs.add(new Song(songTitle,duration));
+    }
+
+    public boolean addToPlayList(int trackNumber, LinkedList<Song> playlist) {
+        Song checkedSong = this.songs.findSong(trackNumber);
+        if(checkedSong != null) {
+            playlist.add(checkedSong);
+            return true;
+        }
+        return false;
+    }
+
+    public boolean addToPlayList(String songTitle, LinkedList<Song> playlist) {
+        Song checkedSong = this.songs.findSong(songTitle);
+        if(checkedSong != null) {
+            playlist.add(checkedSong);
+            return true;
+        }
+        return false;
+    }
+
+    public static class SongList {
+        private ArrayList<Song> songs;
+
+        private SongList() {
+            this.songs = new ArrayList<Song>();
         }
 
-        return this.songs.add(new Song(title,duration));
-    }
-
-    private Song findSong(String title){
-        for (Song song : this.songs) {
-            if (Objects.equals(song.getTitle(), title)) {
-                return song;
+        private boolean add(Song song) {
+            if(songs.contains(song)) {
+                return false;
             }
-        }
-        return null;
-    }
-
-    public boolean addToPlayList(int track, LinkedList<Song> songLinkedList){
-        if (track<0 || track > this.songs.size()-1){
-            return false;
-        }
-            Song song = this.songs.get(track);
-        int indexOf = songLinkedList.indexOf(song);
-        if (indexOf >= 0){
+            this.songs.add(song);
             return true;
         }
-        return songLinkedList.add(song);
+
+        private Song findSong(String songTitle) {
+            for(Song checkingSong: this.songs){
+                if(checkingSong.getTitle().equals(songTitle)) {
+                    return checkingSong;
+                }
+            }
+            return null;
+        }
+
+        private Song findSong(int trackNumber) {
+            int index = trackNumber -1;
+            if((index > 0) && (index<songs.size())) {
+                return songs.get(index);
+            }
+            return null;
+        }
+
     }
 
-    public boolean addToPlayList(String title, LinkedList<Song> songLinkedList){
-        Song song = this.findSong(title);
-        if (song == null){
-            return false;
-        }
-        int indexOf = songLinkedList.indexOf(song);
-        if (indexOf >= 0){
-            return true;
-        }
-        return songLinkedList.add(song);
-    }
 }
