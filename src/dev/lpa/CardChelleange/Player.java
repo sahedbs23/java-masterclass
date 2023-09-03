@@ -1,26 +1,32 @@
 package dev.lpa.CardChelleange;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 public class Player{
+    private Scanner scanner;
     private List<Card> cards;
+    private List<Card> playedCards;
     private char name;
     private Team team;
     public Player(char name,Team team) {
         this.name = name;
         this.team = team;
         this.cards = new ArrayList<>(8);
+        this.playedCards = new ArrayList<>(8);
+        this.scanner = new Scanner(System.in);
     }
 
     public void setCards(List<Card> cards) {
-        this.cards = cards.subList(0,7);
+        this.cards = cards.subList(0,8);
         this.cards.sort(Comparator.comparingInt(Card::rank)) ;
     }
 
     public Card throwCard(){
-        return this.cards.get(this.cards.size()-1);
+        List<Card> tempCards = new ArrayList<>(this.cards);
+        var res = tempCards.removeAll(playedCards);
+        int userInput = new Random().nextInt(0,tempCards.size()-1);
+        playedCards.add(cards.get(userInput));
+        return this.cards.get(userInput);
     }
 
     public Team getTeam(){
@@ -34,7 +40,7 @@ public class Player{
             stringBuilder.append(card.toString());
             stringBuilder.append(" ");
         }
-        return "%c of %s : %s".formatted(name,team.getName(),stringBuilder.toString());
+        return "%c of %s : %s".formatted(name,team.getName(),"");
     }
 
     public String getName() {
