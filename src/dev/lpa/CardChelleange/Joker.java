@@ -4,61 +4,49 @@ import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Joker {
+    private int callValue;
+    private int maxSake;
     private Suit termCard;
     private Player initiator;
     private List<Player> players;
     private List<Card> cards;
     private List<List<Card>> turnCards;
     private HashMap<Team, Integer> scoreTable;
-    private int callValue;
 
     public Joker() {
-        this.players = new ArrayList<>(6);
-        addPlayers();
-        this.cards = new ArrayList<>();
-        this.scoreTable = new HashMap<>(1);
-        this.turnCards = new ArrayList<>();
+        this.scoreTable = new HashMap<>(2);
+        this.turnCards = new ArrayList<>(12);
         this.callValue = 5;
+        addPlayers();
         this.initiator = this.players.get(0);
-        getJokerDeck();
-    }
-
-    public void distributeCard(int maxShake) {
-        for (int i = 0; i < maxShake; i++) {
-            Collections.shuffle(this.cards);
-        }
-        AtomicInteger startIndex = new AtomicInteger();
-        AtomicInteger endEndIndex = new AtomicInteger(8);
-        this.players.forEach(player -> {
-            player.setCards(this.cards.subList(startIndex.get(), endEndIndex.get()));
-            startIndex.set(startIndex.get() + 8);
-            endEndIndex.set(endEndIndex.get() + 8);
-        });
     }
 
     /**
      * @param suit term card
      */
     public void play(Suit suit) {
+
         this.termCard = suit;
         this.scoreTable.put(Team.TEAM_A, 0);
         this.scoreTable.put(Team.TEAM_B, 0);
         boolean keepPlaying = true;
         int loopCount = 0;
         while (keepPlaying) {
+            getJokerDeck();
+            distributeCard(this.maxSake);
             int teamATurnResult = 0;
             int teamBTurnResult = 0;
-            System.out.println("Play started by: " + initiator.getName());
-//            setInitiator(players.get(0));
+            setCallValue(new Random().nextInt(5,9));
+            System.out.println("Play started by: " + initiator.getName() + " with call : " + callValue);
             int loopInitiator = this.players.indexOf(initiator);
             for (int i = 0; i < 8; i++) {
                 HashMap<Player, Card> playerCards = new HashMap<>();
                 ListIterator<Player> listIterator = this.players.listIterator(loopInitiator);
-                while (listIterator.hasNext()){
+                while (listIterator.hasNext()) {
                     var player = listIterator.next();
-                    playerCards.put(player,player.throwCard());
+                    playerCards.put(player, player.throwCard());
                 }
-                var winnerPlayer = determineWinner(playerCards,this.players.get(loopInitiator));
+                var winnerPlayer = determineWinner(playerCards, this.players.get(loopInitiator));
                 if (winnerPlayer.getTeam() == Team.TEAM_A) {
                     teamATurnResult++;
                 } else {
@@ -67,7 +55,7 @@ public class Joker {
                 loopInitiator = this.players.indexOf(winnerPlayer);
             }
             System.out.printf("On Turn %d -> Team A Earned: %d, Team B Earned: %d %n", loopCount, teamATurnResult, teamBTurnResult);
-            updatePointTable(findOpositeTeam() == Team.TEAM_A ? teamATurnResult:teamBTurnResult);
+            updatePointTable(teamATurnResult, teamBTurnResult);
             System.out.printf("Turn %d -> Team A Point: %d, Team B Point: %d %n", loopCount, scoreTable.get(Team.TEAM_A), scoreTable.get(Team.TEAM_B));
             loopCount++;
             if (scoreTable.get(Team.TEAM_A) >= 32 || scoreTable.get(Team.TEAM_B) >= 32) {
@@ -81,6 +69,9 @@ public class Joker {
         }
     }
 
+    public void setMaxSake(int maxSake) {
+        this.maxSake = maxSake;
+    }
 
     public void showBoard() {
         this.players.forEach(System.out::println);
@@ -96,24 +87,39 @@ public class Joker {
 
     public void setCallValue(int callValue) {
         if (callValue < 4) {
-            return;
+            throw new RuntimeException("Minimum call value is 4");
         }
         this.callValue = callValue;
     }
 
+    private void distributeCard(int maxShake) {
+        for (int i = 0; i < maxShake; i++) {
+            Collections.shuffle(this.cards);
+        }
+        AtomicInteger startIndex = new AtomicInteger();
+        AtomicInteger endEndIndex = new AtomicInteger(8);
+        this.players.forEach(player -> {
+            player.setCards(this.cards.subList(startIndex.get(), endEndIndex.get()));
+            startIndex.set(startIndex.get() + 8);
+            endEndIndex.set(endEndIndex.get() + 8);
+        });
+    }
+
     private void addPlayers() {
+        this.players = new ArrayList<>(6);
         int asciiVal = 65;
         for (int i = 0; i < 6; i++) {
             if (i % 2 == 0) {
-                this.players.add(new Player((char) asciiVal, Team.TEAM_A));
+                this.players.add(new Player(Character.toString(asciiVal), Team.TEAM_A));
             } else {
-                this.players.add(new Player((char) asciiVal, Team.TEAM_B));
+                this.players.add(new Player(Character.toString(asciiVal), Team.TEAM_B));
             }
             asciiVal++;
         }
     }
 
     private void getJokerDeck() {
+        this.cards = new ArrayList<>(48);
         for (Suit suit : Suit.values()) {
             for (int rank = 3; rank <= 10; rank++) {
                 if (suit == Suit.HEART && rank == 3) {
@@ -129,28 +135,43 @@ public class Joker {
         this.cards.add(Card.getFaceCard(Suit.HEART, "JJ", 15));
     }
 
-    private void updatePointTable(int score) {
-        var opositeTeam = findOpositeTeam();
-        var team = initiator.getTeam();
-        var initiatorPreviousScore = scoreTable.get(team);
-        var oppositeTeamPreviousScore = scoreTable.get(team);
-        if (score >= callValue) {
-            if (oppositeTeamPreviousScore > 0) {
-                scoreTable.put(opositeTeam, Math.max(0, oppositeTeamPreviousScore - callValue));
+    private void updatePointTable(int teamAScore, int teamBScore) {
+        if (initiator.getTeam() == Team.TEAM_A) {
+            if (teamAScore >= callValue) {
+                var res = scoreTable.get(Team.TEAM_B) - callValue;
+                scoreTable.put(Team.TEAM_B, Math.max(0, res));
+                if (res < 0) {
+                    this.setInitiator(findNextInitiator());
+                    scoreTable.put(Team.TEAM_A, scoreTable.get(Team.TEAM_A)-res);
+                }
             } else {
-                scoreTable.put(team, initiatorPreviousScore + callValue);
+                var res = scoreTable.get(Team.TEAM_A) - callValue * 2;
+                scoreTable.put(Team.TEAM_A, Math.max(0, res));
+                if (res < 0) {
+                    this.setInitiator(findNextInitiator());
+                    scoreTable.put(Team.TEAM_B, scoreTable.get(Team.TEAM_B)-res);
+                }
             }
         } else {
-            var result = initiatorPreviousScore - (callValue * 2);
-            if (result < 0) {
-                scoreTable.put(opositeTeam, -result);
+            if (teamBScore >= callValue) {
+                var res = scoreTable.get(Team.TEAM_A) - callValue;
+                scoreTable.put(Team.TEAM_A, Math.max(0, res));
+                if (res < 0) {
+                    this.setInitiator(findNextInitiator());
+                    scoreTable.put(Team.TEAM_B, scoreTable.get(Team.TEAM_B)-res);
+                }
             } else {
-                scoreTable.put(team, result);
+                var res = scoreTable.get(Team.TEAM_B) - callValue * 2;
+                scoreTable.put(Team.TEAM_B, Math.max(0, res));
+                if (res < 0) {
+                    this.setInitiator(findNextInitiator());
+                    scoreTable.put(Team.TEAM_A, scoreTable.get(Team.TEAM_A) -res);
+                }
             }
         }
     }
 
-    public Player determineWinner(HashMap<Player, Card> hashMap, Player initiator) {
+    private Player determineWinner(HashMap<Player, Card> hashMap, Player initiator) {
         Player winnerPlayer = this.players.get(0);
         int termRank = Integer.MIN_VALUE;
         int rank = 3;
@@ -188,6 +209,10 @@ public class Joker {
             return Team.TEAM_B;
         }
         return Team.TEAM_A;
+    }
+
+    private Player findNextInitiator() {
+        return this.players.get((this.players.indexOf(initiator) +1) % 6);
     }
 
 }

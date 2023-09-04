@@ -3,17 +3,15 @@ package dev.lpa.CardChelleange;
 import java.util.*;
 
 public class Player{
-    private Scanner scanner;
     private List<Card> cards;
-    private List<Card> playedCards;
-    private char name;
-    private Team team;
-    public Player(char name,Team team) {
+    private final List<Card> playedCards;
+    private String name;
+    private final Team team;
+    public Player(String name,Team team) {
         this.name = name;
         this.team = team;
         this.cards = new ArrayList<>(8);
         this.playedCards = new ArrayList<>(8);
-        this.scanner = new Scanner(System.in);
     }
 
     public void setCards(List<Card> cards) {
@@ -40,10 +38,10 @@ public class Player{
             stringBuilder.append(card.toString());
             stringBuilder.append(" ");
         }
-        return "%c of %s : %s".formatted(name,team.getName(),"");
+        return "%s of %s : %s".formatted(name,team.getName(),"");
     }
 
     public String getName() {
-        return "%s : %c".formatted(team.getName(),name);
+        return "%s : %s".formatted(team.getName(),name);
     }
 }
