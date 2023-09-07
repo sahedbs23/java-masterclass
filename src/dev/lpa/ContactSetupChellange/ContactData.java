@@ -28,26 +28,6 @@ public class ContactData {
             Daffy Duck, daffy@google.com
             """;
 
-    private String phoneContacts = """
-    Sahed Moral, 1714999720
-    Rejuana Rahman, 1730445377
-    Tabassum Promy, 1614999720
-    Liza Akter, 1814999720
-    Imran Hossain, 1514999720
-    Mostafizur Rahman, 1314999720
-    Sahed Moral, 1714999720
-            """;
-
-    private String emailContacts = """
-    Sahed Moral, sahed.moral@123rf.com
-    Rejuana Rahman, rejuana.khan@gmail.com
-    Tabassum Promy, promypromy@gmail.com
-    Liza Akter, lizasolaiman@gmail.com
-    Imran Hossain, hossainImran@outlook.com
-    Mostafizur Rahman, rahman@outlook.com
-    Sahed Moral, sahed.moral@123rf.com
-            """;
-
     public static List<Contact> getData(String type){
         List<Contact> contactList = new ArrayList<>();
         Scanner scanner = new Scanner(type.equals("email") ? emailData : phoneData);
