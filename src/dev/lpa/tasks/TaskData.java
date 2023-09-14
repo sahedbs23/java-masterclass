@@ -55,7 +55,7 @@ public class TaskData {
         while (scanner.hasNextLine()) {
             String[] inputs = scanner.nextLine().split(",");
             Arrays.asList(inputs).replaceAll(String::trim);
-            Priority priority = Priority.LOW;
+            Priority priority = Priority.valueOf(inputs[2].toUpperCase());
             if (inputs.length == 4) {
                 tasks.add(new Task(inputs[0], inputs[1], priority, assingee, TaskStatus.valueOf(inputs[3].replace(' ', '_').toUpperCase())));
             } else {
